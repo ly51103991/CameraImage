@@ -30,19 +30,6 @@ namespace CameraImage
         {
             delegateCallback = takeCameraOne;
             updateList();
-            /*HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "TriggerSource", "Line1");
-            //下面设置连续采集，上升沿触发，曝光模式等
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "AcquisitionMode", "Continuous");
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "TriggerSelector", "FrameStart");
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "TriggerActivation", "RisingEdge");
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "ExposureMode", "Timed");
-            //设置曝光时间
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "ExposureTime", 80000.0);
-            //下面为设置用不超时
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "grab_timeout", -1);*/
-            // IntPtr ptr = Marshal.GetFunctionPointerForDelegate(delegateCallback);//取回调函数的地址
-            //IntPtr ptr1 = GCHandle.Alloc(test, GCHandleType.Pinned).AddrOfPinnedObject();//取test变量的地址
-            // HOperatorSet.SetFramegrabberCallback(hv_AcqHandle, "transfer_end", ptr, ptr1);//注册回调函数
             checkCamera();
         }
 
@@ -72,6 +59,7 @@ namespace CameraImage
             {
                 HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
                  8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle);
+                HOperatorSet.GrabImageStart(hv_AcqHandle, -1);
                 checkOnlineTimer.Enabled = true;
                 checkOnlineTimer.Start();
             }
@@ -116,7 +104,7 @@ namespace CameraImage
         {
             try
             {
-                HOperatorSet.GrabImage(out ho_image, hv_AcqHandle);
+                HOperatorSet.GrabImageAsync(out ho_image, hv_AcqHandle,-1);
                 if (this.hWindowControl1.InvokeRequired)
                 {
                     this.Invoke(new MethodInvoker(() => {
@@ -215,8 +203,8 @@ namespace CameraImage
 
         private void btnAddModel_Click(object sender, EventArgs e)
         {
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_mode", 1);
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "grab_timeout", -1);
+            //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_mode", 1);
+            //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "grab_timeout", -1);
             string word = Interaction.InputBox("请输入密码", "身份验证", "", 100, 100);
             if (word != "123456") { MessageBox.Show("密码错误！"); return; }
             string str = Interaction.InputBox("请输入模板名字", "创建模板", "", 100, 100);
@@ -247,7 +235,7 @@ namespace CameraImage
                 if ((int)hv_i!=1) MessageBox.Show("请将要识别物体顺时针旋转90度，再点击确定");
                 else { MessageBox.Show("单击鼠标左键并拖动选择模板区域，右键确定！");}
                 //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "software_trig", 1);
-                HOperatorSet.GrabImage(out ho_Image, hv_AcqHandle);
+                HOperatorSet.GrabImageAsync(out ho_Image, hv_AcqHandle,-1);
                // hv_Width.Dispose(); hv_Height.Dispose();
                 HOperatorSet.GetImageSize(ho_Image, out hv_Width, out hv_Height);
                // HOperatorSet.SetWindowAttr("background_color", "red");
@@ -299,7 +287,7 @@ namespace CameraImage
         }
 
         private void checkModel(HObject ho_Image1)
-        {      
+        {         
             HTuple hv_Row = new HTuple();
             HTuple hv_Column = new HTuple();
             HTuple hv_Width = new HTuple(), hv_Height = new HTuple();
@@ -334,16 +322,19 @@ namespace CameraImage
                 HOperatorSet.FindShapeModels(ho_Image1, hv_ModelIDs, 0, (new HTuple(360)).TupleRad()
                     , 0.5, 8, 0.5, "least_squares", 0, 0.8, out hv_Row, out hv_Column, out hv_Angle,
                     out hv_Score, out hv_ModelIndex);
-
-                if ((int)(new HTuple(hv_Score.TupleGreater(0))) != 0)
-                {
-                    pictureBox1.BackColor = Color.Green;
+            HTuple newHandle = hv_AcqHandle.TupleIsNumber();
+            MvApi.CameraSetStrobeMode(newHandle, 0);
+            if ((int)(new HTuple(hv_Score.TupleGreater(0))) != 0)
+            {
+                MvApi.CameraSetIOState(newHandle,0,1);
+                pictureBox1.BackColor = Color.Green;
                     a++;
                     TrueNum.Text = a + "个";
                 }
                 else
                 {
-                    pictureBox1.BackColor = Color.Red;
+                MvApi.CameraSetIOState(newHandle, 0, 0);
+                pictureBox1.BackColor = Color.Red;
                     b++;
                     WrongNum.Text = b + "个";
                 }
