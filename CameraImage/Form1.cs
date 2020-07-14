@@ -175,7 +175,7 @@ namespace CameraImage
             HTuple hv_AcqHandle_model;
         HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
                  8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle_model);
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "color_space", "BGR24");
+            HOperatorSet.SetFramegrabberParam(hv_AcqHandle_model, "color_space", "BGR24");
             hv_AcqHandle = hv_AcqHandle_model;
             HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
             string word = Interaction.InputBox("请输入密码", "身份验证", ""  , 100, 100);
@@ -306,6 +306,7 @@ namespace CameraImage
                 HOperatorSet.TupleMean(hv_Value2, out hv_Mean2);
                 if (hv_Mean < hv_Mean2) hv_resultValue = hv_Mean2 - hv_Mean;
                 else hv_resultValue = hv_Mean - hv_Mean2;
+                MessageBox.Show("检测照片平均灰度："+hv_Mean+"------模板平均灰度："+hv_Mean2+"-----差值："+hv_resultValue);
                 if ((int)(new HTuple(hv_resultValue.TupleGreater(int.Parse(yuZhi.Value.ToString())))) == 0)
                 {
                     HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "GPO1", 1);
