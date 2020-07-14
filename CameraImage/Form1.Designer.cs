@@ -229,7 +229,6 @@
             // yuZhiCha
             // 
             this.yuZhiCha.AutoSize = true;
-            this.yuZhiCha.Enabled = false;
             this.yuZhiCha.Font = new System.Drawing.Font("宋体", 14.25F);
             this.yuZhiCha.Location = new System.Drawing.Point(907, 340);
             this.yuZhiCha.Name = "yuZhiCha";
