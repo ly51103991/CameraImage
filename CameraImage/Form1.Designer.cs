@@ -197,7 +197,7 @@
             this.yuZhi.Size = new System.Drawing.Size(39, 26);
             this.yuZhi.TabIndex = 22;
             this.yuZhi.Value = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});

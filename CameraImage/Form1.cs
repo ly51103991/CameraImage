@@ -290,8 +290,8 @@ namespace CameraImage
                 for (hv_Index = 1; (int)hv_Index <= 200; hv_Index = (int)hv_Index + 1)
                 {
                     HOperatorSet.GetGrayval(ho_Image1, 5 * hv_Index, 5 * hv_Index, out hv_Grayval);
-                    HOperatorSet.GetGrayval(ho_Image1, 5 * hv_Index, 1024-5 * hv_Index, out hv_Grayval);
-                    hv_Value = hv_Value.TupleConcat(hv_Grayval.TupleSelect(0));
+                    //HOperatorSet.GetGrayval(ho_Image1, 5 * hv_Index, 1024-5 * hv_Index, out hv_Grayval);
+                    hv_Value = hv_Value.TupleConcat(hv_Grayval);
                 }
                 HOperatorSet.TupleMean(hv_Value, out hv_Mean);
 
@@ -299,8 +299,8 @@ namespace CameraImage
                 for (hv_Index2 = 1; (int)hv_Index2 <= 200; hv_Index2 = (int)hv_Index2 + 1)
                 {
                     HOperatorSet.GetGrayval(ho_ImageModel, 5 * hv_Index2, 5 * hv_Index2, out hv_Grayval2);
-                    HOperatorSet.GetGrayval(ho_ImageModel, 5 * hv_Index2, 1024-(5 * hv_Index2), out hv_Grayval2);
-                    hv_Value2 = hv_Value2.TupleConcat(hv_Grayval2.TupleSelect(0));
+                   // HOperatorSet.GetGrayval(ho_ImageModel, 5 * hv_Index2, 1024-(5 * hv_Index2), out hv_Grayval2);
+                    hv_Value2 = hv_Value2.TupleConcat(hv_Grayval2);
                 }
                 HOperatorSet.TupleMean(hv_Value2, out hv_Mean2);
                 if (hv_Mean < hv_Mean2) hv_resultValue = hv_Mean2 - hv_Mean;
