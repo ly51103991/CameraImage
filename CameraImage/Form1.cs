@@ -176,7 +176,7 @@ namespace CameraImage
         HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
                  8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle_model);
             HOperatorSet.SetFramegrabberParam(hv_AcqHandle_model, "color_space", "BGR24");
-            hv_AcqHandle = hv_AcqHandle_model;
+           // hv_AcqHandle = hv_AcqHandle_model;
             HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
             string word = Interaction.InputBox("请输入密码", "身份验证", ""  , 100, 100);
             if (word != "123456") { MessageBox.Show("密码错误！"); return; }
@@ -187,14 +187,13 @@ namespace CameraImage
                 MessageBox.Show("已有重复模板！");
                 return;
             }
-            HObject ho_Image_model = null, ho_Circle = null, ho_ImageReduced = null,ho_colorImage=null;
+            HObject ho_Circle = null, ho_ImageReduced = null,ho_colorImage=null;
             HTuple hv_i = new HTuple();
             HTuple hv_Width = new HTuple(), hv_Height = new HTuple();
             HTuple hv_WindowHandle = new HTuple(), hv_Row = new HTuple();
             HTuple hv_Column = new HTuple(), hv_Radius = new HTuple();
             HTuple hv_ModelID = new HTuple();
             // Initialize local and output iconic variables 
-            HOperatorSet.GenEmptyObj(out ho_Image_model);
             HOperatorSet.GenEmptyObj(out ho_Circle);
             HOperatorSet.GenEmptyObj(out ho_ImageReduced);
             try
@@ -203,12 +202,12 @@ namespace CameraImage
                 //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "software_trig", 1);
                 HOperatorSet.GrabImageAsync(out ho_colorImage, hv_AcqHandle_model, -1);
                 HOperatorSet.WriteImage(ho_colorImage, "png", 0, "c:/modelFiles/"+str);
-                HOperatorSet.Rgb1ToGray(ho_colorImage, out ho_Image_model);
+                //HOperatorSet.Rgb1ToGray(ho_colorImage, out ho_Image_model);
                // hv_Width.Dispose(); hv_Height.Dispose();
-                HOperatorSet.GetImageSize(ho_Image_model, out hv_Width, out hv_Height);
+                HOperatorSet.GetImageSize(ho_colorImage, out hv_Width, out hv_Height);
                // HOperatorSet.SetWindowAttr("background_color", "red");
                 HOperatorSet.OpenWindow(0, 0, hv_Width+1, hv_Height+1, 0, "visible", "", out hv_WindowHandle);
-                HOperatorSet.DispImage(ho_Image_model, hv_WindowHandle);
+                HOperatorSet.DispImage(ho_colorImage, hv_WindowHandle);
                 HDevWindowStack.Push(hv_WindowHandle);
                    // ho_Image.Dispose();
                // hv_Row.Dispose(); hv_Column.Dispose(); hv_Radius.Dispose();
@@ -216,11 +215,11 @@ namespace CameraImage
                 ho_Circle.Dispose();
                 HOperatorSet.GenCircle(out ho_Circle, hv_Row, hv_Column, hv_Radius);
                 ho_ImageReduced.Dispose();
-                HOperatorSet.ReduceDomain(ho_Image_model, ho_Circle, out ho_ImageReduced);
+                HOperatorSet.ReduceDomain(ho_colorImage, ho_Circle, out ho_ImageReduced);
                // hv_ModelID.Dispose();
                 HOperatorSet.CreateShapeModel(ho_ImageReduced, "auto", 0, (new HTuple(360)).TupleRad()
                     , "auto", "auto", "use_polarity", "auto", "auto", out hv_ModelID);
-                HOperatorSet.WriteShapeModel(hv_ModelID, ("h:modelFiles/model-" + str + ".shm"));
+                HOperatorSet.WriteShapeModel(hv_ModelID, ("c:modelFiles/model-" + str + ".shm"));
                     HOperatorSet.CloseWindow(hv_WindowHandle);               
             }
             catch (Exception)
@@ -236,7 +235,7 @@ namespace CameraImage
                 }
                 finally {
                     HOperatorSet.CloseFramegrabber(hv_AcqHandle_model);
-                ho_Image_model.Dispose();
+                ho_colorImage.Dispose();
                     ho_Circle.Dispose();
                     ho_ImageReduced.Dispose();
                     hv_i.UnpinTuple();
@@ -254,7 +253,7 @@ namespace CameraImage
             updateList();
         }
 
-        private void checkModel(HObject ho_ImageColor)
+        private void checkModel(HObject ho_Image1)
         {         
             HTuple hv_Row = new HTuple();
             HTuple hv_Column = new HTuple();
@@ -262,8 +261,8 @@ namespace CameraImage
             HTuple hv_ModelID = new HTuple();
             HTuple hv_ModelIDs = new HTuple(), hv_Angle = new HTuple();
             HTuple hv_Score = new HTuple(), hv_ModelIndex = new HTuple();
-            HObject ho_Image1 = null;
-            HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
+           // HObject ho_Image1 = null;
+           // HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
 
             // hv_ModelID1.Dispose();
             HOperatorSet.ReadShapeModel("c:modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
@@ -271,8 +270,8 @@ namespace CameraImage
   
                 HOperatorSet.GetImageSize(ho_Image1, out hv_Width, out hv_Height);
                 if (hWindowControl1.HalconWindow.ToString() == "") { return; }
-                HOperatorSet.SetPart(hWindowControl1.HalconWindow, 0, 0, hv_Width+1, hv_Height+1);
-                HOperatorSet.DispObj(ho_ImageColor, hWindowControl1.HalconWindow);
+                HOperatorSet.SetPart(hWindowControl1.HalconWindow, 0, 0, hv_Width, hv_Height);
+                HOperatorSet.DispObj(ho_Image1, hWindowControl1.HalconWindow);
                // hv_Row.Dispose(); hv_Column.Dispose(); hv_Angle.Dispose(); hv_Score.Dispose(); hv_ModelIndex.Dispose();
                 HOperatorSet.FindShapeModel(ho_Image1, hv_ModelID, 0, (new HTuple(360)).TupleRad()
                     , 0.5, 8, 0.5, "least_squares", 0, 0.8, out hv_Row, out hv_Column, out hv_Angle,
@@ -286,7 +285,7 @@ namespace CameraImage
                 HTuple hv_Mean = null, hv_Value2 = null, hv_Index2 = null;
                 HTuple hv_Grayval2 = new HTuple(), hv_Mean2 = null, hv_resultValue = null;
                 string s = modelList.SelectedItem.ToString();
-                HOperatorSet.ReadImage(out ho_ImageModel, "h:/modelFiles/" + s.Substring(6, s.Length - 10) + ".png");
+                HOperatorSet.ReadImage(out ho_ImageModel, "c:/modelFiles/" + s.Substring(6, s.Length - 10) + ".png");
                 hv_Value = new HTuple();
                 for (hv_Index = 1; (int)hv_Index <= 200; hv_Index = (int)hv_Index + 1)
                 {
