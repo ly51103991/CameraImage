@@ -44,6 +44,8 @@
             this.lazyTime = new System.Windows.Forms.TextBox();
             this.yuZhi = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkBoxTiao = new System.Windows.Forms.CheckBox();
+            this.yuZhiCha = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yuZhi)).BeginInit();
             this.SuspendLayout();
@@ -155,16 +157,16 @@
             this.modelList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.modelList.Font = new System.Drawing.Font("宋体", 12F);
             this.modelList.FormattingEnabled = true;
-            this.modelList.Location = new System.Drawing.Point(1011, 120);
+            this.modelList.Location = new System.Drawing.Point(962, 120);
             this.modelList.Name = "modelList";
-            this.modelList.Size = new System.Drawing.Size(121, 24);
+            this.modelList.Size = new System.Drawing.Size(176, 24);
             this.modelList.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(946, 120);
+            this.label1.Location = new System.Drawing.Point(907, 120);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 16;
@@ -174,7 +176,7 @@
             // 
             this.timeCam.AutoSize = true;
             this.timeCam.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.timeCam.Location = new System.Drawing.Point(890, 257);
+            this.timeCam.Location = new System.Drawing.Point(907, 233);
             this.timeCam.Name = "timeCam";
             this.timeCam.Size = new System.Drawing.Size(115, 19);
             this.timeCam.TabIndex = 20;
@@ -183,7 +185,7 @@
             // lazyTime
             // 
             this.lazyTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lazyTime.Location = new System.Drawing.Point(1011, 255);
+            this.lazyTime.Location = new System.Drawing.Point(1011, 231);
             this.lazyTime.Name = "lazyTime";
             this.lazyTime.Size = new System.Drawing.Size(52, 26);
             this.lazyTime.TabIndex = 21;
@@ -192,7 +194,7 @@
             // yuZhi
             // 
             this.yuZhi.Font = new System.Drawing.Font("宋体", 12F);
-            this.yuZhi.Location = new System.Drawing.Point(1161, 255);
+            this.yuZhi.Location = new System.Drawing.Point(1161, 231);
             this.yuZhi.Name = "yuZhi";
             this.yuZhi.Size = new System.Drawing.Size(39, 26);
             this.yuZhi.TabIndex = 22;
@@ -206,15 +208,40 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 14.25F);
-            this.label5.Location = new System.Drawing.Point(1089, 257);
+            this.label5.Location = new System.Drawing.Point(1089, 233);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 19);
             this.label5.TabIndex = 23;
             this.label5.Text = "阈值：";
             // 
+            // checkBoxTiao
+            // 
+            this.checkBoxTiao.AutoSize = true;
+            this.checkBoxTiao.Font = new System.Drawing.Font("宋体", 14.25F);
+            this.checkBoxTiao.Location = new System.Drawing.Point(911, 323);
+            this.checkBoxTiao.Name = "checkBoxTiao";
+            this.checkBoxTiao.Size = new System.Drawing.Size(104, 23);
+            this.checkBoxTiao.TabIndex = 24;
+            this.checkBoxTiao.Text = "调式阈值";
+            this.checkBoxTiao.UseVisualStyleBackColor = true;
+            this.checkBoxTiao.CheckedChanged += new System.EventHandler(this.checkBoxTiao_CheckedChanged);
+            // 
+            // yuZhiCha
+            // 
+            this.yuZhiCha.AutoSize = true;
+            this.yuZhiCha.Enabled = false;
+            this.yuZhiCha.Font = new System.Drawing.Font("宋体", 14.25F);
+            this.yuZhiCha.Location = new System.Drawing.Point(907, 367);
+            this.yuZhiCha.Name = "yuZhiCha";
+            this.yuZhiCha.Size = new System.Drawing.Size(19, 19);
+            this.yuZhiCha.TabIndex = 25;
+            this.yuZhiCha.Text = " ";
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1287, 701);
+            this.ClientSize = new System.Drawing.Size(1366, 730);
+            this.Controls.Add(this.yuZhiCha);
+            this.Controls.Add(this.checkBoxTiao);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.yuZhi);
             this.Controls.Add(this.lazyTime);
@@ -258,6 +285,8 @@
         private System.Windows.Forms.TextBox lazyTime;
         private System.Windows.Forms.NumericUpDown yuZhi;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBoxTiao;
+        private System.Windows.Forms.Label yuZhiCha;
     }
 }
 

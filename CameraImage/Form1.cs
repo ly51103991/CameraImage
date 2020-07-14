@@ -168,6 +168,12 @@ namespace CameraImage
             }
         }
 
+        private void checkBoxTiao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTiao.Checked) yuZhiCha.Enabled = true;
+            else yuZhiCha.Enabled = false;       
+    }
+
         private void btnAddModel_Click(object sender, EventArgs e)
         {
             //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_mode", 1);
@@ -305,7 +311,8 @@ namespace CameraImage
                 HOperatorSet.TupleMean(hv_Value2, out hv_Mean2);
                 if (hv_Mean < hv_Mean2) hv_resultValue = hv_Mean2 - hv_Mean;
                 else hv_resultValue = hv_Mean - hv_Mean2;
-                MessageBox.Show("检测照片平均灰度："+hv_Mean+"------模板平均灰度："+hv_Mean2+"-----差值："+hv_resultValue);
+                yuZhiCha.Text = "检测照片平均灰度：" + hv_Mean + "------模板平均灰度：" + hv_Mean2 + "-----差值：" + hv_resultValue;
+                //MessageBox.Show("检测照片平均灰度："+hv_Mean+"------模板平均灰度："+hv_Mean2+"-----差值："+hv_resultValue);
                 if ((int)(new HTuple(hv_resultValue.TupleGreater(int.Parse(yuZhi.Value.ToString())))) == 0)
                 {
                     HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "GPO1", 1);
