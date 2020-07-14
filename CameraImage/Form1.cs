@@ -34,7 +34,7 @@ namespace CameraImage
         void updateList()
         {
             modelList.Items.Clear();
-            DirectoryInfo dir = new DirectoryInfo("h:/modelFiles/");
+            DirectoryInfo dir = new DirectoryInfo("c:/modelFiles/");
             FileInfo[] subDirs = dir.GetFiles("*.shm");
             foreach (FileInfo subDir in subDirs)
             {
@@ -182,7 +182,7 @@ namespace CameraImage
             if (word != "123456") { MessageBox.Show("密码错误！"); return; }
             string str = Interaction.InputBox("请输入模板名字", "创建模板", "", 100, 100);
             if (str == "") { str = "默认"; };
-            if (true == Directory.Exists("h:/modelFiles/model-" + str+".shm"))
+            if (true == Directory.Exists("c:/modelFiles/model-" + str+".shm"))
             {
                 MessageBox.Show("已有重复模板！");
                 return;
@@ -202,7 +202,7 @@ namespace CameraImage
                 MessageBox.Show("单击鼠标左键并拖动选择模板区域，右键确定！");
                 //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "software_trig", 1);
                 HOperatorSet.GrabImageAsync(out ho_colorImage, hv_AcqHandle_model, -1);
-                HOperatorSet.WriteImage(ho_colorImage, "png", 0, "H:/modelFiles/"+str);
+                HOperatorSet.WriteImage(ho_colorImage, "png", 0, "c:/modelFiles/"+str);
                 HOperatorSet.Rgb1ToGray(ho_colorImage, out ho_Image_model);
                // hv_Width.Dispose(); hv_Height.Dispose();
                 HOperatorSet.GetImageSize(ho_Image_model, out hv_Width, out hv_Height);
@@ -227,8 +227,8 @@ namespace CameraImage
                 {
                     MessageBox.Show("操作出错！请重新添加模板。");
                     
-                File.Delete("h:/modelFiles/model-"+str+".shm");
-                File.Delete("h:/modelFiles/" + str + ".png");
+                File.Delete("c:/modelFiles/model-"+str+".shm");
+                File.Delete("c:/modelFiles/" + str + ".png");
 
                 HOperatorSet.CloseWindow(hv_WindowHandle);
                 return;
@@ -266,7 +266,7 @@ namespace CameraImage
             HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
 
             // hv_ModelID1.Dispose();
-            HOperatorSet.ReadShapeModel("h:modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
+            HOperatorSet.ReadShapeModel("c:modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
            // hv_ModelIDs.Dispose();
   
                 HOperatorSet.GetImageSize(ho_Image1, out hv_Width, out hv_Height);
