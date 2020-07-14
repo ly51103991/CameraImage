@@ -224,7 +224,7 @@ namespace CameraImage
                // hv_ModelID.Dispose();
                 HOperatorSet.CreateShapeModel(ho_ImageReduced, "auto", 0, (new HTuple(360)).TupleRad()
                     , "auto", "auto", "use_polarity", "auto", "auto", out hv_ModelID);
-                HOperatorSet.WriteShapeModel(hv_ModelID, ("c:modelFiles/model-" + str + ".shm"));
+                HOperatorSet.WriteShapeModel(hv_ModelID, ("c:/modelFiles/model-" + str + ".shm"));
                     HOperatorSet.CloseWindow(hv_WindowHandle);               
             }
             catch (Exception)
@@ -270,7 +270,7 @@ namespace CameraImage
            // HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
 
             // hv_ModelID1.Dispose();
-            HOperatorSet.ReadShapeModel("c:modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
+            HOperatorSet.ReadShapeModel("c:/modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
            // hv_ModelIDs.Dispose();
   
                 HOperatorSet.GetImageSize(ho_Image1, out hv_Width, out hv_Height);
