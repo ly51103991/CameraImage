@@ -64,7 +64,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("宋体", 12F);
-            this.button2.Location = new System.Drawing.Point(907, 413);
+            this.button2.Location = new System.Drawing.Point(911, 414);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(127, 50);
             this.button2.TabIndex = 2;
@@ -75,7 +75,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pictureBox1.Location = new System.Drawing.Point(1007, 515);
+            this.pictureBox1.Location = new System.Drawing.Point(1011, 516);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(89, 54);
             this.pictureBox1.TabIndex = 7;
@@ -95,7 +95,7 @@
             // 
             this.WrongNum.AutoSize = true;
             this.WrongNum.Font = new System.Drawing.Font("宋体", 12F);
-            this.WrongNum.Location = new System.Drawing.Point(1067, 621);
+            this.WrongNum.Location = new System.Drawing.Point(1081, 622);
             this.WrongNum.Name = "WrongNum";
             this.WrongNum.Size = new System.Drawing.Size(16, 16);
             this.WrongNum.TabIndex = 9;
@@ -105,7 +105,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 12F);
-            this.label2.Location = new System.Drawing.Point(908, 621);
+            this.label2.Location = new System.Drawing.Point(912, 622);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 10;
@@ -115,7 +115,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 12F);
-            this.label3.Location = new System.Drawing.Point(1023, 621);
+            this.label3.Location = new System.Drawing.Point(1035, 622);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 16);
             this.label3.TabIndex = 11;
@@ -125,7 +125,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 12F);
-            this.label4.Location = new System.Drawing.Point(1115, 621);
+            this.label4.Location = new System.Drawing.Point(1158, 621);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 16);
             this.label4.TabIndex = 12;
@@ -135,7 +135,7 @@
             // 
             this.allNum.AutoSize = true;
             this.allNum.Font = new System.Drawing.Font("宋体", 12F);
-            this.allNum.Location = new System.Drawing.Point(1151, 621);
+            this.allNum.Location = new System.Drawing.Point(1194, 621);
             this.allNum.Name = "allNum";
             this.allNum.Size = new System.Drawing.Size(16, 16);
             this.allNum.TabIndex = 13;
@@ -144,7 +144,7 @@
             // btnAddModel
             // 
             this.btnAddModel.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnAddModel.Location = new System.Drawing.Point(1080, 413);
+            this.btnAddModel.Location = new System.Drawing.Point(1084, 414);
             this.btnAddModel.Name = "btnAddModel";
             this.btnAddModel.Size = new System.Drawing.Size(126, 50);
             this.btnAddModel.TabIndex = 14;
@@ -157,7 +157,7 @@
             this.modelList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.modelList.Font = new System.Drawing.Font("宋体", 12F);
             this.modelList.FormattingEnabled = true;
-            this.modelList.Location = new System.Drawing.Point(962, 120);
+            this.modelList.Location = new System.Drawing.Point(972, 120);
             this.modelList.Name = "modelList";
             this.modelList.Size = new System.Drawing.Size(176, 24);
             this.modelList.TabIndex = 15;
@@ -176,7 +176,7 @@
             // 
             this.timeCam.AutoSize = true;
             this.timeCam.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.timeCam.Location = new System.Drawing.Point(907, 233);
+            this.timeCam.Location = new System.Drawing.Point(907, 206);
             this.timeCam.Name = "timeCam";
             this.timeCam.Size = new System.Drawing.Size(115, 19);
             this.timeCam.TabIndex = 20;
@@ -185,7 +185,7 @@
             // lazyTime
             // 
             this.lazyTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lazyTime.Location = new System.Drawing.Point(1011, 231);
+            this.lazyTime.Location = new System.Drawing.Point(1011, 204);
             this.lazyTime.Name = "lazyTime";
             this.lazyTime.Size = new System.Drawing.Size(52, 26);
             this.lazyTime.TabIndex = 21;
@@ -194,12 +194,12 @@
             // yuZhi
             // 
             this.yuZhi.Font = new System.Drawing.Font("宋体", 12F);
-            this.yuZhi.Location = new System.Drawing.Point(1161, 231);
+            this.yuZhi.Location = new System.Drawing.Point(1161, 204);
             this.yuZhi.Name = "yuZhi";
             this.yuZhi.Size = new System.Drawing.Size(39, 26);
             this.yuZhi.TabIndex = 22;
             this.yuZhi.Value = new decimal(new int[] {
-            10,
+            19,
             0,
             0,
             0});
@@ -208,7 +208,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 14.25F);
-            this.label5.Location = new System.Drawing.Point(1089, 233);
+            this.label5.Location = new System.Drawing.Point(1089, 206);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 19);
             this.label5.TabIndex = 23;
@@ -218,7 +218,7 @@
             // 
             this.checkBoxTiao.AutoSize = true;
             this.checkBoxTiao.Font = new System.Drawing.Font("宋体", 14.25F);
-            this.checkBoxTiao.Location = new System.Drawing.Point(911, 323);
+            this.checkBoxTiao.Location = new System.Drawing.Point(911, 278);
             this.checkBoxTiao.Name = "checkBoxTiao";
             this.checkBoxTiao.Size = new System.Drawing.Size(104, 23);
             this.checkBoxTiao.TabIndex = 24;
@@ -231,7 +231,7 @@
             this.yuZhiCha.AutoSize = true;
             this.yuZhiCha.Enabled = false;
             this.yuZhiCha.Font = new System.Drawing.Font("宋体", 14.25F);
-            this.yuZhiCha.Location = new System.Drawing.Point(907, 367);
+            this.yuZhiCha.Location = new System.Drawing.Point(907, 340);
             this.yuZhiCha.Name = "yuZhiCha";
             this.yuZhiCha.Size = new System.Drawing.Size(19, 19);
             this.yuZhiCha.TabIndex = 25;
@@ -239,7 +239,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1366, 730);
+            this.ClientSize = new System.Drawing.Size(1384, 730);
             this.Controls.Add(this.yuZhiCha);
             this.Controls.Add(this.checkBoxTiao);
             this.Controls.Add(this.label5);

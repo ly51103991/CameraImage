@@ -311,7 +311,7 @@ namespace CameraImage
                 HOperatorSet.TupleMean(hv_Value2, out hv_Mean2);
                 if (hv_Mean < hv_Mean2) hv_resultValue = hv_Mean2 - hv_Mean;
                 else hv_resultValue = hv_Mean - hv_Mean2;
-                yuZhiCha.Text = "检测照片平均灰度：" + hv_Mean + "------模板平均灰度：" + hv_Mean2 + "-----差值：" + hv_resultValue;
+                yuZhiCha.Text = "检测" + hv_Mean + "-模板：" + hv_Mean2 + "-差值：" + hv_resultValue;
                 //MessageBox.Show("检测照片平均灰度："+hv_Mean+"------模板平均灰度："+hv_Mean2+"-----差值："+hv_resultValue);
                 if ((int)(new HTuple(hv_resultValue.TupleGreater(int.Parse(yuZhi.Value.ToString())))) == 0)
                 {
