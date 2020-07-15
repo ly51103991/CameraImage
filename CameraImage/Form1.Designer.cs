@@ -196,6 +196,7 @@
             this.yuZhi.Font = new System.Drawing.Font("宋体", 12F);
             this.yuZhi.Location = new System.Drawing.Point(1161, 204);
             this.yuZhi.Name = "yuZhi";
+            this.yuZhi.ReadOnly = true;
             this.yuZhi.Size = new System.Drawing.Size(39, 26);
             this.yuZhi.TabIndex = 22;
             this.yuZhi.Value = new decimal(new int[] {
