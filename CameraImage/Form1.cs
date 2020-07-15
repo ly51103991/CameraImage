@@ -125,46 +125,6 @@ namespace CameraImage
                 lazyTime.Enabled = true;
                 yuZhi.Enabled = true;
                 HOperatorSet.CloseFramegrabber(hv_AcqHandle);
-                /* string modelName = modelList.SelectedItem.ToString();
-                 int trueNumber = Convert.ToInt32(TrueNum.Text[0]);
-                 int falseNumber = Convert.ToInt32(WrongNum.Text[0]);
-                 int allNumber = Convert.ToInt32(allNum.Text[0]);
-                   chanPin cp = new chanPin();
-                   cp.modelName = modelName;
-                   cp.trueNumber = trueNumber;
-                   cp.falseNumber = falseNumber;
-                   cp.allNumber = allNumber;
-                   
-                DataTable dt = new DataTable();
-                  dt.Columns.Add("模板名");
-                  dt.Columns.Add("相同");
-                  dt.Columns.Add("不同");
-                  dt.Columns.Add("总数");
-                DataRow dr = dt.NewRow();
-                object[] chanPin = { modelName, trueNumber, falseNumber, allNumber };
-                dr.ItemArray=chanPin;
-                dt.Rows.Add(dr);
-
-                Excel::Application xlsApp = new Excel::Application();
-                xlsApp.Workbooks.Add(true);
-                xlsApp.Cells[1][3] = "序号";
-                for (int i = 0; i < dt.Columns.Count; i++)
-                {
-                    xlsApp.Cells[i + 2][3] = dt.Columns[i].ColumnName;
-                }
-                xlsApp.Rows[3].HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    xlsApp.Cells[1][i + 4] = i.ToString();
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
-                        xlsApp.Cells[j + 2][i + 4] = dt.Rows[i][j];
-
-                    }
-                }
-                xlsApp.Rows[4].HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter;
-
-                xlsApp.ActiveWorkbook.SaveAs("F:\\检测产品数据表.xlsx");*/
             }
         }
 
@@ -243,15 +203,7 @@ namespace CameraImage
                 ho_colorImage.Dispose();
                     ho_Circle.Dispose();
                     ho_ImageReduced.Dispose();
-                    hv_i.UnpinTuple();
-                // hv_i.Dispose();
-                // hv_Width.Dispose();
-                //hv_Height.Dispose();
-                //hv_WindowHandle.Dispose();
-                // hv_Row.Dispose();
-                // hv_Column.Dispose();
-                // hv_Radius.Dispose();
-                //hv_ModelID.Dispose();               
+                    hv_i.UnpinTuple();             
             }
             
             MessageBox.Show("模板创建成功！");
@@ -281,8 +233,6 @@ namespace CameraImage
                 HOperatorSet.FindShapeModel(ho_Image1, hv_ModelID, 0, (new HTuple(360)).TupleRad()
                     , 0.5, 8, 0.5, "least_squares", 0, 0.8, out hv_Row, out hv_Column, out hv_Angle,
                     out hv_Score);
-           // HTuple newHandle = hv_AcqHandle.TupleIsNumber();
-           // MvApi.CameraSetStrobeMode(newHandle, 0);
             if ((int)(new HTuple(hv_Score.TupleGreater(0))) != 0)
             {
                 HObject ho_ImageModel;
@@ -335,27 +285,7 @@ namespace CameraImage
                     WrongNum.Text = b + "个";
                 }
                 c = a + b;
-                allNum.Text = c + "个";
-                /* ho_Image1.Dispose();
-                  hv_AcqHandle.Dispose();
-                  hv_Row.Dispose();
-                  hv_Column.Dispose();
-                  hv_ModelID1.Dispose();
-                  hv_ModelID2.Dispose();
-                  hv_ModelID3.Dispose();
-                  hv_ModelID4.Dispose();
-                  hv_ModelIDs.Dispose();
-                  hv_Angle.Dispose();
-                  hv_Score.Dispose();
-                  hv_ModelIndex.Dispose();*/
+                allNum.Text = c + "个";              
             }
         }
-   /* public class chanPin
-    {
-        public string modelName { get; set; }
-        public int trueNumber { get; set; }
-        public int falseNumber { get; set; }
-        public int allNumber { get; set; }
-        public DateTime dataTime { get; set; }
-    }*/
 }
