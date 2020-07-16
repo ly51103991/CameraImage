@@ -125,12 +125,13 @@ namespace CameraImage
                 lazyTime.Enabled = true;
                 yuZhi.Enabled = true;
                 HOperatorSet.CloseFramegrabber(hv_AcqHandle);
+                hv_AcqHandle = null;
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            HOperatorSet.CloseFramegrabber(hv_AcqHandle);
+           if(hv_AcqHandle!=null) HOperatorSet.CloseFramegrabber(hv_AcqHandle);
         }
 
         // private void checkBoxTiao_CheckedChanged(object sender, EventArgs e)
