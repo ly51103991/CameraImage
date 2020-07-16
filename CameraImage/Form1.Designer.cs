@@ -54,8 +54,8 @@
             // 
             this.hWindowControl1.BackColor = System.Drawing.Color.Black;
             this.hWindowControl1.BorderColor = System.Drawing.Color.Black;
-            this.hWindowControl1.ImagePart = new System.Drawing.Rectangle(0, 0, 1280, 1024);
-            this.hWindowControl1.Location = new System.Drawing.Point(100, 49);
+            this.hWindowControl1.ImagePart = new System.Drawing.Rectangle(0, 0, 640, 512);
+            this.hWindowControl1.Location = new System.Drawing.Point(104, 120);
             this.hWindowControl1.Name = "hWindowControl1";
             this.hWindowControl1.Size = new System.Drawing.Size(640, 512);
             this.hWindowControl1.TabIndex = 0;
@@ -200,7 +200,7 @@
             this.yuZhi.Size = new System.Drawing.Size(39, 26);
             this.yuZhi.TabIndex = 22;
             this.yuZhi.Value = new decimal(new int[] {
-            19,
+            6,
             0,
             0,
             0});
@@ -225,7 +225,6 @@
             this.checkBoxTiao.TabIndex = 24;
             this.checkBoxTiao.Text = "调式阈值";
             this.checkBoxTiao.UseVisualStyleBackColor = true;
-            this.checkBoxTiao.CheckedChanged += new System.EventHandler(this.checkBoxTiao_CheckedChanged);
             // 
             // yuZhiCha
             // 
@@ -239,7 +238,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1384, 730);
+            this.ClientSize = new System.Drawing.Size(1360, 921);
             this.Controls.Add(this.yuZhiCha);
             this.Controls.Add(this.checkBoxTiao);
             this.Controls.Add(this.label5);
@@ -259,6 +258,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.hWindowControl1);
             this.Name = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yuZhi)).EndInit();

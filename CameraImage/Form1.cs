@@ -128,32 +128,34 @@ namespace CameraImage
             }
         }
 
-        private void checkBoxTiao_CheckedChanged(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!checkBoxTiao.Checked) yuZhiCha.Text="";
-    }
+            HOperatorSet.CloseFramegrabber(hv_AcqHandle);
+        }
+
+        // private void checkBoxTiao_CheckedChanged(object sender, EventArgs e)
+        //  {
+        //    if (!checkBoxTiao.Checked) yuZhiCha.Text="";
+        // }
 
         private void btnAddModel_Click(object sender, EventArgs e)
-        {
-            //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_mode", 1);
-            // HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "grab_timeout", -1);          
-            HTuple hv_AcqHandle_model;
-        HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
-                 8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle_model);
-            HOperatorSet.SetFramegrabberParam(hv_AcqHandle_model, "color_space", "BGR24");
-           // hv_AcqHandle = hv_AcqHandle_model;
-            HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
+        {          
             string word = Interaction.InputBox("请输入密码", "身份验证", ""  , 100, 100);
-            if (word != "123456") { MessageBox.Show("密码错误！"); return; }
+            if (word != "123456") { MessageBox.Show("密码不能为空或错误！"); return; }
             string str = Interaction.InputBox("请输入模板名字", "创建模板", "", 100, 100);
-            if (str == "") { str = "默认"; };
+            if (str == "") { MessageBox.Show("名字不能为空！"); return; };
             if (true == Directory.Exists("c:/modelFiles/model-" + str+".shm"))
             {
                 MessageBox.Show("已有重复模板！");
                 return;
             }
+            HTuple hv_AcqHandle_model;
+            HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
+                     8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle_model);
+            HOperatorSet.SetFramegrabberParam(hv_AcqHandle_model, "color_space", "BGR24");
+            // hv_AcqHandle = hv_AcqHandle_model;
+            HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
             HObject ho_Circle = null, ho_ImageReduced = null,ho_colorImage=null;
-            HTuple hv_i = new HTuple();
             HTuple hv_Width = new HTuple(), hv_Height = new HTuple();
             HTuple hv_WindowHandle = new HTuple(), hv_Row = new HTuple();
             HTuple hv_Column = new HTuple(), hv_Radius = new HTuple();
@@ -203,7 +205,6 @@ namespace CameraImage
                 ho_colorImage.Dispose();
                     ho_Circle.Dispose();
                     ho_ImageReduced.Dispose();
-                    hv_i.UnpinTuple();             
             }
             
             MessageBox.Show("模板创建成功！");
@@ -227,7 +228,7 @@ namespace CameraImage
   
                 HOperatorSet.GetImageSize(ho_Image1, out hv_Width, out hv_Height);
                 if (hWindowControl1.HalconWindow.ToString() == "") { return; }
-                HOperatorSet.SetPart(hWindowControl1.HalconWindow, 0, 0, hv_Width, hv_Height);
+                HOperatorSet.SetPart(hWindowControl1.HalconWindow, 0, 0, hv_Width-1, hv_Height-1);
                 HOperatorSet.DispObj(ho_Image1, hWindowControl1.HalconWindow);
                // hv_Row.Dispose(); hv_Column.Dispose(); hv_Angle.Dispose(); hv_Score.Dispose(); hv_ModelIndex.Dispose();
                 HOperatorSet.FindShapeModel(ho_Image1, hv_ModelID, 0, (new HTuple(360)).TupleRad()
@@ -259,8 +260,9 @@ namespace CameraImage
                 }
                 HOperatorSet.TupleMean(hv_Value2, out hv_Mean2);
                 if (hv_Mean < hv_Mean2) hv_resultValue = hv_Mean2 - hv_Mean;
-                else hv_resultValue = hv_Mean - hv_Mean2;
-                if(checkBoxTiao.Checked) yuZhiCha.Text = "检测:" + hv_Mean + "-模板：" + hv_Mean2 + "-差值：" + hv_resultValue;
+                else { hv_resultValue = hv_Mean - hv_Mean2; }
+                if (checkBoxTiao.Checked) yuZhiCha.Text = "检测:" + hv_Mean + "-模板：" + hv_Mean2 + "-差值：" + hv_resultValue;
+                else yuZhiCha.Text = "";
                 //MessageBox.Show("检测照片平均灰度："+hv_Mean+"------模板平均灰度："+hv_Mean2+"-----差值："+hv_resultValue);
                 if ((int)(new HTuple(hv_resultValue.TupleGreater(int.Parse(yuZhi.Value.ToString())))) == 0)
                 {
