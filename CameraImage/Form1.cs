@@ -59,8 +59,7 @@ namespace CameraImage
         private int test = 1;//随便定义的一个变量，后面会取其地址带入回调函数的user_context
         int i = 0;
         public int takeCameraOne(IntPtr handle,IntPtr context,IntPtr user_context)
-        {
-            
+        {           
             try
             {
                 //HOperatorSet.GrabImageAsync(out ho_image, hv_AcqHandle,-1);
@@ -102,7 +101,7 @@ namespace CameraImage
                 HOperatorSet.OpenFramegrabber("MindVision17_X64", 1, 1, 0, 0, 0, 0, "progressive",
                 8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle);
                 HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "color_space", "BGR24");
-                HOperatorSet.GrabImageStart(hv_AcqHandle, -1);
+                //HOperatorSet.GrabImageStart(hv_AcqHandle, -1);
                 HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_mode", 2);//开启硬触发
                 HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "grab_timeout", -1);
                 HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "trigger_delay_time", lTime*1000);
@@ -157,7 +156,7 @@ namespace CameraImage
                      8, "Gray", -1, "false", "auto", "oufang", 0, -1, out hv_AcqHandle_model);
             HOperatorSet.SetFramegrabberParam(hv_AcqHandle_model, "color_space", "BGR24");
             // hv_AcqHandle = hv_AcqHandle_model;
-            HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
+            //HOperatorSet.GrabImageStart(hv_AcqHandle_model, -1);
             HObject ho_Circle = null, ho_ImageReduced = null,ho_colorImage=null;
             HTuple hv_Width = new HTuple(), hv_Height = new HTuple();
             HTuple hv_WindowHandle = new HTuple(), hv_Row = new HTuple();
@@ -170,7 +169,7 @@ namespace CameraImage
             {                                    
                 MessageBox.Show("单击鼠标左键并拖动选择模板区域，右键确定！");
                 //HOperatorSet.SetFramegrabberParam(hv_AcqHandle, "software_trig", 1);
-                HOperatorSet.GrabImageAsync(out ho_colorImage, hv_AcqHandle_model, -1);
+                HOperatorSet.GrabImage(out ho_colorImage, hv_AcqHandle_model);
                 HOperatorSet.WriteImage(ho_colorImage, "png", 0, "c:/modelFiles/"+str);
                 //HOperatorSet.Rgb1ToGray(ho_colorImage, out ho_Image_model);
                // hv_Width.Dispose(); hv_Height.Dispose();
@@ -225,7 +224,7 @@ namespace CameraImage
             HTuple hv_Score = new HTuple(), hv_ModelIndex = new HTuple();
             // HObject ho_Image1 = null;
             // HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
-            HOperatorSet.GrabImageAsync(out ho_Image1, hv_AcqHandle, -1);
+            HOperatorSet.GrabImage(out ho_Image1, hv_AcqHandle);
 
             // hv_ModelID1.Dispose();
             HOperatorSet.ReadShapeModel("c:/modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
