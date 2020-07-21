@@ -85,6 +85,7 @@
             // 
             this.TrueNum.AutoSize = true;
             this.TrueNum.Font = new System.Drawing.Font("宋体", 12F);
+            this.TrueNum.ForeColor = System.Drawing.Color.Green;
             this.TrueNum.Location = new System.Drawing.Point(954, 621);
             this.TrueNum.Name = "TrueNum";
             this.TrueNum.Size = new System.Drawing.Size(16, 16);
@@ -95,6 +96,7 @@
             // 
             this.WrongNum.AutoSize = true;
             this.WrongNum.Font = new System.Drawing.Font("宋体", 12F);
+            this.WrongNum.ForeColor = System.Drawing.Color.Red;
             this.WrongNum.Location = new System.Drawing.Point(1081, 622);
             this.WrongNum.Name = "WrongNum";
             this.WrongNum.Size = new System.Drawing.Size(16, 16);

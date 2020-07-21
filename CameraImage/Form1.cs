@@ -19,7 +19,7 @@ namespace CameraImage
     public partial class Form1 : Form
     {
         public  HTuple hv_AcqHandle = null;
-        public HObject ho_image = null;
+       // public HObject ho_image = null;
         HalconAPI.HFramegrabberCallback delegateCallback;
         int a = 0, b = 0, c = 0;
         public Form1()
@@ -57,19 +57,20 @@ namespace CameraImage
             pictureBox1.BackColor = Color.WhiteSmoke;
         }
         private int test = 1;//随便定义的一个变量，后面会取其地址带入回调函数的user_context
-
+        int i = 0;
         public int takeCameraOne(IntPtr handle,IntPtr context,IntPtr user_context)
         {
+            
             try
             {
-                HOperatorSet.GrabImageAsync(out ho_image, hv_AcqHandle,-1);
+                //HOperatorSet.GrabImageAsync(out ho_image, hv_AcqHandle,-1);
                 if (this.hWindowControl1.InvokeRequired)
                 {
                     this.Invoke(new MethodInvoker(() => {
-                        if (ho_image != null) {
-                       checkModel(ho_image);
-                        }
+                        if (i != 0) checkModel();
                     }));//把图像显示出来（这里是委托方式显示)
+                    i++;
+                    if (i > 1000) i = 1;
                 }
                 else
                 {
@@ -126,6 +127,7 @@ namespace CameraImage
                 yuZhi.Enabled = true;
                 HOperatorSet.CloseFramegrabber(hv_AcqHandle);
                 hv_AcqHandle = null;
+                i= 0;
             }
         }
 
@@ -212,16 +214,18 @@ namespace CameraImage
             updateList();
         }
 
-        private void checkModel(HObject ho_Image1)
-        {         
+        private void checkModel()
+        {
+            HObject ho_Image1=null;
             HTuple hv_Row = new HTuple();
             HTuple hv_Column = new HTuple();
             HTuple hv_Width = new HTuple(), hv_Height = new HTuple();
             HTuple hv_ModelID = new HTuple();
             HTuple hv_ModelIDs = new HTuple(), hv_Angle = new HTuple();
             HTuple hv_Score = new HTuple(), hv_ModelIndex = new HTuple();
-           // HObject ho_Image1 = null;
-           // HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
+            // HObject ho_Image1 = null;
+            // HOperatorSet.Rgb1ToGray(ho_ImageColor, out ho_Image1);
+            HOperatorSet.GrabImageAsync(out ho_Image1, hv_AcqHandle, -1);
 
             // hv_ModelID1.Dispose();
             HOperatorSet.ReadShapeModel("c:/modelFiles/"+modelList.SelectedItem.ToString(), out hv_ModelID);
